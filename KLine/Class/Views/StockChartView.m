@@ -88,7 +88,7 @@
 
 - (StockChartSegmentView *)segmentView{
     if (!_segmentView) {
-        _segmentView = [StockChartSegmentView new];
+        _segmentView = [[StockChartSegmentView alloc] init];
         _segmentView.delegate = self;
         [self addSubview:_segmentView];
         [_segmentView mas_makeConstraints:^(MASConstraintMaker *make) {

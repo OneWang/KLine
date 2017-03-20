@@ -70,8 +70,8 @@
     NSString *priceText = [NSString stringWithFormat:@"%.2f",self.selectedModel.close.floatValue];
     CGRect priceRect = [self rectOfNSString:priceText attribute:attribute];
     CGContextSetFillColorWithColor(context, [UIColor redColor].CGColor);
-    CGContextFillRect(context, CGRectMake(45 - priceRect.size.width - 4, self.stockScrollView.frame.origin.y + self.selectedPositionModel.ClosePoint.y - priceRect.size.height / 2.f - 2, priceRect.size.width + 4, priceRect.size.height + 4));
-    [priceText drawInRect:CGRectMake(45 - priceRect.size.width - 4 + 2, self.stockScrollView.frame.origin.y + self.selectedPositionModel.ClosePoint.y - priceRect.size.height/2.f, priceRect.size.width, priceRect.size.height) withAttributes:attribute];
+    CGContextFillRect(context, CGRectMake(45 - priceRect.size.width - 9, self.stockScrollView.frame.origin.y + self.selectedPositionModel.ClosePoint.y - priceRect.size.height / 2.f - 2, priceRect.size.width + 4, priceRect.size.height + 4));
+    [priceText drawInRect:CGRectMake(45 - priceRect.size.width - 9 + 2, self.stockScrollView.frame.origin.y + self.selectedPositionModel.ClosePoint.y - priceRect.size.height/2.f, priceRect.size.width, priceRect.size.height) withAttributes:attribute];
 }
 
 - (NSString *)timeWithTimeIntervalString:(NSString *)timeString{

@@ -42,7 +42,6 @@
         self.needDrawStartIndex = 0;
     }
     return self;
-    
 }
 
 #pragma mark - 绘图相关的方法
@@ -63,7 +62,7 @@
     //设置 view 的背景颜色
     NSMutableArray *kLineColors = @[].mutableCopy;
     CGContextClearRect(context, rect);
-    CGContextSetFillColorWithColor(context, [UIColor backgroundColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:120/255.0 green:220/255.0 blue:134/255.0 alpha:0.4].CGColor);
     CGContextFillRect(context, rect);
     
     //设置显示日期的区域背景颜色
