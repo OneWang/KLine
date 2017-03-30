@@ -35,7 +35,7 @@
     self.currentIndex = -1;
     self.stockChartView.backgroundColor = [UIColor backgroundColor];
     
-    UITabBarController
+    
     
 }
 

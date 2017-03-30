@@ -4,7 +4,7 @@
 //
 //  Created by Jack on 2017/3/2.
 //  Copyright © 2017年 Jack. All rights reserved.
-//  划线
+//  画蜡烛线
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
