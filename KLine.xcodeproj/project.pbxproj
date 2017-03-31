@@ -26,6 +26,7 @@
 		04E05F0B1E6E7DDD00165295 /* UIColor+StockColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E05F0A1E6E7DDD00165295 /* UIColor+StockColor.m */; };
 		04E05F0E1E6E94AB00165295 /* StockChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E05F0D1E6E94AB00165295 /* StockChartView.m */; };
 		04E05F111E6E98AE00165295 /* StockChartSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E05F101E6E98AE00165295 /* StockChartSegmentView.m */; };
+		0A9455BC1E8E0712006AC9BE /* KLineMAView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9455BB1E8E0712006AC9BE /* KLineMAView.m */; };
 		CFDA940C104FED27E890D995 /* libPods-KLine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C379EF934BA07F3ED3E02105 /* libPods-KLine.a */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,9 @@
 		04E05F0D1E6E94AB00165295 /* StockChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockChartView.m; sourceTree = "<group>"; };
 		04E05F0F1E6E98AE00165295 /* StockChartSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StockChartSegmentView.h; sourceTree = "<group>"; };
 		04E05F101E6E98AE00165295 /* StockChartSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockChartSegmentView.m; sourceTree = "<group>"; };
+		0A9455BA1E8E0712006AC9BE /* KLineMAView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLineMAView.h; sourceTree = "<group>"; };
+		0A9455BB1E8E0712006AC9BE /* KLineMAView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLineMAView.m; sourceTree = "<group>"; };
+		0A9455BD1E8E094B006AC9BE /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		3DB9D4498A868E9CAD5C2173 /* Pods-KLine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KLine.release.xcconfig"; path = "Pods/Target Support Files/Pods-KLine/Pods-KLine.release.xcconfig"; sourceTree = "<group>"; };
 		956ED32F1F6A422366D102DD /* Pods-KLine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KLine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KLine/Pods-KLine.debug.xcconfig"; sourceTree = "<group>"; };
 		C379EF934BA07F3ED3E02105 /* libPods-KLine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KLine.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,6 +188,7 @@
 				04D05FBB1E682A480098B877 /* LaunchScreen.storyboard */,
 				04D05FBE1E682A480098B877 /* Info.plist */,
 				04D05FAD1E682A480098B877 /* Supporting Files */,
+				0A9455BD1E8E094B006AC9BE /* PrefixHeader.pch */,
 			);
 			path = KLine;
 			sourceTree = "<group>";
@@ -217,6 +222,7 @@
 		04D05FE01E682B550098B877 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				0A9455B91E8E06E5006AC9BE /* AccessaryView */,
 				04E05F041E6E778C00165295 /* Constant */,
 				04CE661F1E69603D00C0E0C8 /* Models */,
 				04CE66201E69603D00C0E0C8 /* Views */,
@@ -234,6 +240,15 @@
 				04E05F0A1E6E7DDD00165295 /* UIColor+StockColor.m */,
 			);
 			path = Constant;
+			sourceTree = "<group>";
+		};
+		0A9455B91E8E06E5006AC9BE /* AccessaryView */ = {
+			isa = PBXGroup;
+			children = (
+				0A9455BA1E8E0712006AC9BE /* KLineMAView.h */,
+				0A9455BB1E8E0712006AC9BE /* KLineMAView.m */,
+			);
+			path = AccessaryView;
 			sourceTree = "<group>";
 		};
 		4F92CE3A6BCCA954D08535D0 /* Frameworks */ = {
@@ -449,6 +464,7 @@
 				04CA4B7E1E6FF025003655DD /* KlineLongPress.m in Sources */,
 				04E05F111E6E98AE00165295 /* StockChartSegmentView.m in Sources */,
 				04D05FB21E682A480098B877 /* AppDelegate.m in Sources */,
+				0A9455BC1E8E0712006AC9BE /* KLineMAView.m in Sources */,
 				04D05FAF1E682A480098B877 /* main.m in Sources */,
 				04CE66261E69605500C0E0C8 /* KLineModel.m in Sources */,
 			);
@@ -600,6 +616,7 @@
 			baseConfigurationReference = 956ED32F1F6A422366D102DD /* Pods-KLine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = KLine/PrefixHeader.pch;
 				INFOPLIST_FILE = KLine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -614,6 +631,7 @@
 			baseConfigurationReference = 3DB9D4498A868E9CAD5C2173 /* Pods-KLine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = KLine/PrefixHeader.pch;
 				INFOPLIST_FILE = KLine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

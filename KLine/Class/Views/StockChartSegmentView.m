@@ -7,8 +7,6 @@
 //
 
 #import "StockChartSegmentView.h"
-#import "UIColor+StockColor.h"
-#import <Masonry.h>
 
 static NSInteger const StockChartSegmentStartTag = 2000;
 

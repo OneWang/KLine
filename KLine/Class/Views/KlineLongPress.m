@@ -7,9 +7,6 @@
 //
 
 #import "KlineLongPress.h"
-#import "StockConstant.h"
-#import "StockConstantVariable.h"
-#import "UIColor+StockColor.h"
 
 @implementation KlineLongPress
 
@@ -18,7 +15,6 @@
     
     [self drawDashLine];
 }
-
 
 /**
  绘制长按的背景线

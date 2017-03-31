@@ -23,6 +23,7 @@
 
 @property (nonatomic, assign) NSInteger currentIndex;
 
+///K线图类型
 @property (nonatomic, copy) NSString *type;
 
 @end
@@ -41,7 +42,7 @@
 
 - (void)reloadData{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    NSDictionary *paraDict = @{@"type":@"1min",
+    NSDictionary *paraDict = @{@"type":self.type,
                                @"symbol":@"huobibtccny",
                                @"size":@"300"};
     [manager POST:@"https://www.btc123.com/kline/klineapi" parameters:paraDict progress:^(NSProgress * _Nonnull uploadProgress) {

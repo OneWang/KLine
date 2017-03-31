@@ -24,7 +24,7 @@ static CGFloat StockChartKLineGap = 1;
 /**
  *  MainView的高度占比,默认为0.5
  */
-static CGFloat StockChartKLineMainViewRadio = 0.5;
+static CGFloat StockChartKLineMainViewRadio = 0.98;
 
 /**
  *  VolumeView的高度占比,默认为0.5
@@ -35,7 +35,7 @@ static CGFloat StockChartKLineVolumeViewRadio = 0.2;
 /**
  *  是否为EMA线
  */
-//static StockChartTargetLineStatus StockChartKLineIsEMALine = StockChartTargetLineStatusMA;
+static StockChartTargetLineStatus StockChartKLineIsEMALine = StockChartTargetLineStatusMA;
 
 
 @implementation StockConstantVariable
@@ -92,6 +92,19 @@ static CGFloat StockChartKLineVolumeViewRadio = 0.2;
 + (void)setkLineVolumeViewRadio:(CGFloat)radio
 {
     StockChartKLineVolumeViewRadio = radio;
+}
+
+/**
+ *  isEMA线
+ */
+
++ (CGFloat)isEMALine
+{
+    return StockChartKLineIsEMALine;
+}
++ (void)setisEMALine:(StockChartTargetLineStatus)type
+{
+    StockChartKLineIsEMALine = type;
 }
 
 

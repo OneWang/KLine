@@ -61,4 +61,63 @@
     
 }
 
+#pragma mark - setter and getter
+- (NSNumber *)MA7{
+    if (!_MA7) {
+        if ([StockConstantVariable isEMALine] == StockChartTargetLineStatusMA) {
+            if (!_MA7) {
+                NSInteger index = [self.parentGroupModel.models indexOfObject:self];
+                if (index >= 6) {
+                    if (index > 6) {
+                        _MA7 = @((self.sumOfLastClose.floatValue - self.parentGroupModel.models[index - 7].sumOfLastClose.floatValue) / 7);
+                    }else{
+                        _MA7 = @(self.sumOfLastClose.floatValue / 7);
+                    }
+                }
+            }
+        }else{
+            return self.EMA7;
+        }
+    }
+    return _MA7;
+}
+
+- (NSNumber *)MA30{
+    if (!_MA30) {
+        if ([StockConstantVariable isEMALine] == StockChartTargetLineStatusMA) {
+            if (!_MA30) {
+                NSInteger index = [self.parentGroupModel.models indexOfObject:self];
+                if (index >= 29) {
+                    if (index > 29) {
+                        _MA30 = @((self.sumOfLastClose.floatValue - self.parentGroupModel.models[index - 30].sumOfLastClose.floatValue) / 30);
+                    }else{
+                        _MA30 = @(self.sumOfLastClose.floatValue / 30);
+                    }
+                }
+            }
+        }else{
+            return self.EMA30;
+        }
+    }
+    return _MA30;
+}
+
+//// EMA（N）=2/（N+1）*（C-昨日EMA）+昨日EMA；
+- (NSNumber *)EMA7
+{
+    if(!_EMA7) {
+        _EMA7 = @((self.close.floatValue + 3 * self.previousKLineModel.EMA7.floatValue)/4);
+    }
+    return _EMA7;
+}
+
+- (NSNumber *)EMA30
+{
+    if(!_EMA30) {
+        _EMA30 = @((2 * self.close.floatValue + 29 * self.previousKLineModel.EMA30.floatValue)/31);
+    }
+    return _EMA30;
+}
+
+
 @end

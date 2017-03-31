@@ -171,12 +171,11 @@ typedef NS_ENUM(NSInteger, StockChartCenterViewType) {
 };
 
 //Accessory指标种类
-typedef NS_ENUM(NSInteger,  StockChartTargetLineStatus) {
+typedef NS_ENUM(NSInteger, StockChartTargetLineStatus) {
     StockChartTargetLineStatusMACD = 100,    //MACD线
     StockChartTargetLineStatusKDJ,    //KDJ线
     StockChartTargetLineStatusAccessoryClose,    //关闭Accessory线
     StockChartTargetLineStatusMA , //MA线
     StockChartTargetLineStatusEMA,  //EMA线
     StockChartTargetLineStatusCloseMA  //MA关闭线
-    
 };

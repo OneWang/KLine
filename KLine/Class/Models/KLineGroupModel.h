@@ -4,7 +4,7 @@
 //
 //  Created by Jack on 2017/3/3.
 //  Copyright © 2017年 Jack. All rights reserved.
-//
+//  存放K线图的模型的模型
 
 #import <Foundation/Foundation.h>
 

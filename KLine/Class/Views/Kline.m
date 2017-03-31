@@ -7,9 +7,6 @@
 //
 
 #import "Kline.h"
-#import "StockConstant.h"
-#import "StockConstantVariable.h"
-#import "UIColor+StockColor.h"
 
 @interface Kline ()
 
@@ -28,7 +25,7 @@
     if (self = [super init]) {
         
         self.context = context;
-        
+        self.lastDrawDatePoint = CGPointZero;
     }
     return self;
 }
@@ -56,13 +53,14 @@
     //画线
     CGContextStrokeLineSegments(context, shadowPoints, 2);
     
+    //日期
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.kLineModel.date.doubleValue/1000];
     NSDateFormatter *formatter = [NSDateFormatter new];
     formatter.dateFormat = @"HH:mm";
     NSString *dateStr = [formatter stringFromDate:date];
     
     CGPoint drawDatePoint = CGPointMake(self.kLinePositionModel.LowPoint.x + 1, self.maxY + 1.5);
-    if (CGPointEqualToPoint(drawDatePoint, CGPointZero) || drawDatePoint.x - self.lastDrawDatePoint.x > 60) {
+    if (CGPointEqualToPoint(self.lastDrawDatePoint, CGPointZero) || drawDatePoint.x - self.lastDrawDatePoint.x > 60) {
         ///辅助文字
         [dateStr drawAtPoint:drawDatePoint withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:11] , NSForegroundColorAttributeName : [UIColor lightGrayColor]}];
         self.lastDrawDatePoint = drawDatePoint;

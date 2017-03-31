@@ -18,7 +18,7 @@
 ///K 线的位置 model
 @property (nonatomic, strong) KLinePositionModel *kLinePositionModel;
 /**
- *  最大的Y
+ *  K线图上可画区域最大的Y
  */
 @property (nonatomic, assign) CGFloat maxY;
 

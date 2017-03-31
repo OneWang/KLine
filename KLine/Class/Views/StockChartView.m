@@ -8,8 +8,6 @@
 
 #import "StockChartView.h"
 #import "KLineView.h"
-#import <Masonry.h>
-#import "StockConstantVariable.h"
 #import "StockChartSegmentView.h"
 
 @interface StockChartView ()<StockChartSegmentViewDelegate>

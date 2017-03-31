@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "StockConstant.h"
 
 @interface StockConstantVariable : NSObject
 
@@ -36,5 +37,12 @@
  */
 + (CGFloat)kLineVolumeViewRadio;
 + (void)setkLineVolumeViewRadio:(CGFloat)radio;
+
+/**
+ *  isEMA线
+ */
++ (CGFloat)isEMALine;
++ (void)setisEMALine:(StockChartTargetLineStatus)type;
+
 
 @end

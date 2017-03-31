@@ -8,23 +8,27 @@
 
 #import "KLineView.h"
 #import "KLineMainView.h"
-#import <Masonry.h>
-#import "StockConstant.h"
-#import "StockConstantVariable.h"
-#import "UIColor+StockColor.h"
 #import "KlineLongPress.h"
+
+#import "KLineMAView.h"     ///顶部的开收高低view
 
 @interface KLineView ()<UIScrollViewDelegate,KLineMainViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
-
 /**
  *  主K线图
  */
 @property (nonatomic, strong) KLineMainView *kLineMainView;
 
-///长按后显示的 view
+/**
+ *  长按后显示的 view
+ */
 @property (nonatomic, strong) KlineLongPress *longPressView;
+
+/**
+ *  K线图顶部的view
+ */
+@property (strong, nonatomic) KLineMAView *kLineMAView;
 
 @property (nonatomic, strong) MASConstraint *kLineMainViewHeightConstraint;
 
@@ -34,7 +38,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        self.mainViewRatio = 0.5;
+        self.mainViewRatio = 0.98;
         self.volumeViewRatio = 0.2;
     }
     return self;
@@ -57,6 +61,8 @@
     self.longPressView.selectedPositionModel = kLinePositionModel;
     self.longPressView.selectedModel = kLineModel;
     [self.longPressView setNeedsDisplay];
+    
+    [self.kLineMAView maProfileWithModel:kLineModel];
 }
 
 #pragma mark - setter and getter
@@ -91,21 +97,6 @@
     return _scrollView;
 }
 
-- (KLineMainView *)kLineMainView{
-    if (!_kLineMainView && self) {
-        _kLineMainView = [KLineMainView new];
-        _kLineMainView.delegate = self;
-        [self.scrollView addSubview:_kLineMainView];
-        [_kLineMainView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.scrollView).offset(5);
-            make.left.equalTo(self.scrollView);
-            self.kLineMainViewHeightConstraint = make.height.equalTo(self.scrollView).multipliedBy(self.mainViewRatio);
-            make.width.equalTo(@0);
-        }];
-    }
-    return _kLineMainView;
-}
-
 - (void)setKLineModels:(NSArray<KLineModel *> *)kLineModels{
     if (!kLineModels) {
         return;
@@ -122,7 +113,8 @@
         self.scrollView.contentOffset = CGPointMake(0, 0);
     }
     
-//    KLineModel *model = kLineModels.lastObject;
+    KLineModel *model = kLineModels.lastObject;
+    [self.kLineMAView maProfileWithModel:model];
 }
 
 #pragma mark - event事件处理方法
@@ -130,8 +122,8 @@
 - (void)event_pinchMethod:(UIPinchGestureRecognizer *)pinch{
     static CGFloat oldScale = 1.0f;
     CGFloat difValue = pinch.scale - oldScale;
-    if (ABS(difValue) > 0.03) {
-        CGFloat oldKLineWidth = 20;
+    if (ABS(difValue) > StockChartScaleFactor) {
+        CGFloat oldKLineWidth = [StockConstantVariable kLineWidth];
         NSInteger oldNeedDrawStartIndex = self.kLineMainView.needDrawStartIndex;
         NSLog(@"原来的 index %ld",self.kLineMainView.needDrawStartIndex);
         
@@ -190,7 +182,8 @@
         self.scrollView.scrollEnabled = YES;
         [self setNeedsDisplay];
         self.longPressView.hidden = YES;
-//            KLineModel *lastModel = self.kLineModels.lastObject;
+        KLineModel *lastModel = self.kLineModels.lastObject;
+        [self.kLineMAView maProfileWithModel:lastModel];
     }
 }
 
@@ -214,5 +207,35 @@
     [self.kLineMainView removeAllObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+#pragma mark - setter and getter
+- (KLineMAView *)kLineMAView{
+    if (!_kLineMAView) {
+        _kLineMAView = [[KLineMAView alloc] init];
+        [self addSubview:_kLineMAView];
+        [_kLineMAView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(self);
+            make.height.mas_equalTo(10);
+            make.top.equalTo(self).offset(5);
+        }];
+    }
+    return _kLineMAView;
+}
+
+- (KLineMainView *)kLineMainView{
+    if (!_kLineMainView && self) {
+        _kLineMainView = [KLineMainView new];
+        _kLineMainView.delegate = self;
+        [self.scrollView addSubview:_kLineMainView];
+        [_kLineMainView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.scrollView).offset(5);
+            make.left.equalTo(self.scrollView);
+            self.kLineMainViewHeightConstraint = make.height.equalTo(self.scrollView).multipliedBy(self.mainViewRatio);
+            make.width.equalTo(@0);
+        }];
+    }
+    return _kLineMainView;
+}
+
 
 @end

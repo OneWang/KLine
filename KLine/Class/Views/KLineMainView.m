@@ -9,10 +9,6 @@
 #import "KLineMainView.h"
 #import "KLineModel.h"
 #import "Kline.h"
-#import <Masonry.h>
-#import "StockConstant.h"
-#import "StockConstantVariable.h"
-#import "UIColor+StockColor.h"
 
 @interface KLineMainView ()
 
@@ -62,7 +58,7 @@
     //设置 view 的背景颜色
     NSMutableArray *kLineColors = @[].mutableCopy;
     CGContextClearRect(context, rect);
-    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:120/255.0 green:220/255.0 blue:134/255.0 alpha:0.4].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:20/255.0 green:20/255.0 blue:20/255.0 alpha:0.6].CGColor);
     CGContextFillRect(context, rect);
     
     //设置显示日期的区域背景颜色
@@ -247,10 +243,11 @@
     [self.needDrawKLinePositionModels removeAllObjects];
     
     NSInteger kLineModelCount = kLineModels.count;
-    for (NSInteger idx = 0; idx < kLineModelCount; ++ idx) {
+    for (NSInteger idx = 0; idx < kLineModelCount; ++idx) {
         //K 线坐标转换
         KLineModel *kLineModel = kLineModels[idx];
         CGFloat xPosition = self.startXPosition + idx * ([StockConstantVariable kLineWidth] + [StockConstantVariable kLineGap]);
+        //通过开盘价和收盘价与屏幕中中最高和最低的可绘图位置得到转换比率
         CGPoint openPoint = CGPointMake(xPosition, ABS(maxY - (kLineModel.open.floatValue - minAssert) / unitValue));
         CGFloat closePointY = ABS(maxY - (kLineModel.close.floatValue - minAssert)/unitValue);
         if (ABS(closePointY - openPoint.y) < StockChartKLineMinWidth) {
