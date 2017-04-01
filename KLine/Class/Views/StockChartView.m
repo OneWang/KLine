@@ -18,7 +18,7 @@
 ///K 线图类型
 @property (nonatomic, assign) StockChartCenterViewType currentCenterViewType;
 
-///底部选择 view
+///选择 view
 @property (nonatomic, strong) StockChartSegmentView *segmentView;
 
 ///当前索引

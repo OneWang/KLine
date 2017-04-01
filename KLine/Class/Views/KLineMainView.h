@@ -4,10 +4,9 @@
 //
 //  Created by Jack on 2017/3/6.
 //  Copyright © 2017年 Jack. All rights reserved.
-//  主K线图
+//  主K线图(蜡烛图的view)
 
 #import <UIKit/UIKit.h>
-#import "StockConstant.h"
 
 @class KLinePositionModel,KLineModel;
 @protocol KLineMainViewDelegate <NSObject>

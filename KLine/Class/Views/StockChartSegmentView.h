@@ -4,7 +4,7 @@
 //
 //  Created by Jack on 2017/3/7.
 //  Copyright © 2017年 Jack. All rights reserved.
-//
+//  按钮点击view
 
 #import <UIKit/UIKit.h>
 

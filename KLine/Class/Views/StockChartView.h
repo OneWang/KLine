@@ -4,10 +4,9 @@
 //
 //  Created by Jack on 2017/3/7.
 //  Copyright © 2017年 Jack. All rights reserved.
-//
+//  不同类型的K线图的切换;以及一些附属view
 
 #import <UIKit/UIKit.h>
-#import "StockConstant.h"
 
 //种类
 typedef NS_ENUM(NSInteger, KLineType) {

@@ -22,8 +22,10 @@
 ///最低
 @property (weak, nonatomic) UILabel *lowDescLabel;
 
+///均线值
 @property (weak, nonatomic) UILabel *MA7Label;
 @property (weak, nonatomic) UILabel *MA30Label;
+
 @end
 
 @implementation KLineMAView

@@ -4,10 +4,9 @@
 //
 //  Created by Jack on 2017/3/6.
 //  Copyright © 2017年 Jack. All rights reserved.
-//
+//  所有线图的view(K线图;交易量;长按view)
 
 #import <UIKit/UIKit.h>
-#import "StockConstant.h"
 
 @class KLineModel;
 @interface KLineView : UIView

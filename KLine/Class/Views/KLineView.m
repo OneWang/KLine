@@ -7,8 +7,8 @@
 //
 
 #import "KLineView.h"
-#import "KLineMainView.h"
-#import "KlineLongPress.h"
+#import "KLineMainView.h"   ///主K线图(蜡烛图)
+#import "KlineLongPress.h"  ///长按view
 
 #import "KLineMAView.h"     ///顶部的开收高低view
 

@@ -4,7 +4,7 @@
 //
 //  Created by Jack on 2017/3/8.
 //  Copyright © 2017年 Jack. All rights reserved.
-//
+//  长按之后显示的view
 
 #import <UIKit/UIKit.h>
 #import "KLinePositionModel.h"
