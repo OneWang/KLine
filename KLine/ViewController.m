@@ -43,17 +43,15 @@
 - (void)reloadData{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSDictionary *paraDict = @{@"type":self.type,
-                               @"symbol":@"huobibtccny",
-                               @"size":@"300"};
-    [manager POST:@"https://www.btc123.com/kline/klineapi" parameters:paraDict progress:^(NSProgress * _Nonnull uploadProgress) {
+                               @"market":@"btc_usdt",
+                               @"size":@"1000"};
+    [manager GET:@"http://api.bitkk.com/data/v1/kline" parameters:paraDict progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if ([responseObject[@"isSuc"] boolValue]) {
-            KLineGroupModel *groupModel = [KLineGroupModel objectWithArray:responseObject[@"datas"]];
-            self.groupModel = groupModel;
-            [self.modelsDict setObject:groupModel forKey:self.type];
-            [self.stockChartView reloadData];
-        }
+        KLineGroupModel *groupModel = [KLineGroupModel objectWithArray:responseObject[@"data"]];
+        self.groupModel = groupModel;
+        [self.modelsDict setObject:groupModel forKey:self.type];
+        [self.stockChartView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {        
         
     }];
