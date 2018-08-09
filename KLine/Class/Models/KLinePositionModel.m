@@ -11,8 +11,7 @@
 
 @implementation KLinePositionModel
 
-+ (instancetype) modelWithOpen:(CGPoint)openPoint close:(CGPoint)closePoint high:(CGPoint)highPoint low:(CGPoint)lowPoint
-{
++ (instancetype) modelWithOpen:(CGPoint)openPoint close:(CGPoint)closePoint high:(CGPoint)highPoint low:(CGPoint)lowPoint{
     KLinePositionModel *model = [KLinePositionModel new];
     model.OpenPoint = openPoint;
     model.ClosePoint = closePoint;

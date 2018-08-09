@@ -9,7 +9,6 @@
 #import "KLineView.h"
 #import "KLineMainView.h"   ///主K线图(蜡烛图)
 #import "KlineLongPress.h"  ///长按view
-
 #import "KLineMAView.h"     ///顶部的开收高低view
 
 @interface KLineView ()<UIScrollViewDelegate,KLineMainViewDelegate>
@@ -19,12 +18,10 @@
  *  主K线图
  */
 @property (nonatomic, strong) KLineMainView *kLineMainView;
-
 /**
  *  长按后显示的 view
  */
 @property (nonatomic, strong) KlineLongPress *longPressView;
-
 /**
  *  K线图顶部的view
  */
@@ -236,6 +233,5 @@
     }
     return _kLineMainView;
 }
-
 
 @end

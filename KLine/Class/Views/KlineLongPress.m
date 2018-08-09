@@ -84,7 +84,6 @@
     return dateString;
 }
 
-
 - (CGRect)rectOfNSString:(NSString *)string attribute:(NSDictionary *)attribute {
     CGRect rect = [[NSString stringWithFormat:@"%@",string] boundingRectWithSize:CGSizeMake(MAXFLOAT, 0)
                                        options:NSStringDrawingTruncatesLastVisibleLine |NSStringDrawingUsesLineFragmentOrigin |

@@ -103,16 +103,14 @@
 }
 
 //// EMA（N）=2/（N+1）*（C-昨日EMA）+昨日EMA；
-- (NSNumber *)EMA7
-{
+- (NSNumber *)EMA7{
     if(!_EMA7) {
         _EMA7 = @((self.close.floatValue + 3 * self.previousKLineModel.EMA7.floatValue)/4);
     }
     return _EMA7;
 }
 
-- (NSNumber *)EMA30
-{
+- (NSNumber *)EMA30{
     if(!_EMA30) {
         _EMA30 = @((2 * self.close.floatValue + 29 * self.previousKLineModel.EMA30.floatValue)/31);
     }

@@ -40,30 +40,30 @@
         
         UILabel *date = [self createLabel];
         date.textColor = [UIColor whiteColor];
-        self.dateDescLabel = date;
+        _dateDescLabel = date;
         
         UILabel *open = [self createLabel];
         open.textColor = [UIColor whiteColor];
-        self.openDescLabel = open;
+        _openDescLabel = open;
         
         UILabel *close = [self createLabel];
         close.textColor = [UIColor whiteColor];
-        self.closeDescLabel = close;
+        _closeDescLabel = close;
         
         UILabel *hight = [self createLabel];
         hight.textColor = [UIColor whiteColor];
-        self.highDescLabel = hight;
+        _highDescLabel = hight;
         
         UILabel *low = [self createLabel];
         low.textColor = [UIColor whiteColor];
-        self.lowDescLabel = low;
+        _lowDescLabel = low;
         
         UILabel *ma7 = [self createLabel];
-        self.MA7Label = ma7;
+        _MA7Label = ma7;
         ma7.textColor = [UIColor ma7Color];
         
         UILabel *ma30 = [self createLabel];
-        self.MA30Label = ma30;
+        _MA30Label = ma30;
         ma30.textColor = [UIColor ma30Color];
         
         UILabel *openLabel = [self createLabel];
@@ -139,7 +139,6 @@
     NSString *dateStr = [formatter stringFromDate:date];
     
     self.dateDescLabel.text = [@"  " stringByAppendingString:dateStr];
-    
     self.openDescLabel.text = [NSString stringWithFormat:@"%.2f",model.open.floatValue];
     self.highDescLabel.text = [NSString stringWithFormat:@"%.2f",model.high.floatValue];
     self.lowDescLabel.text = [NSString stringWithFormat:@"%.2f",model.low.floatValue];

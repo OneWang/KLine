@@ -33,19 +33,14 @@
 
 ///模型数组
 @property (nonatomic, strong) NSArray *kLineModels;
-
 ///父 scrollview
 @property (nonatomic, weak, readonly) UIScrollView *parentScrollView;
-
 ///类型
 @property (nonatomic, assign) StockChartCenterViewType mainViewType;
-
 ///需要绘制 index 开始值
 @property (nonatomic, assign) NSInteger needDrawStartIndex;
-
 ///捏合点
 @property (nonatomic, assign) NSInteger pinchStartIndex;
-
 ///代理
 @property (nonatomic, weak) id<KLineMainViewDelegate> delegate;
 

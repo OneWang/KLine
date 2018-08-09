@@ -35,9 +35,6 @@
     // Do any additional setup after loading the view, typically from a nib.
     self.currentIndex = -1;
     self.stockChartView.backgroundColor = [UIColor backgroundColor];
-    
-    
-    
 }
 
 - (void)reloadData{

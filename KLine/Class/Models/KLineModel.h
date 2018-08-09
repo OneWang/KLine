@@ -14,16 +14,12 @@
 
 ///前一个 model
 @property (nonatomic, strong) KLineModel *previousKLineModel;
-
 ///父 modelArray: 用来给当前 model 索引到 parent 数组
 @property (nonatomic, strong) KLineGroupModel *parentGroupModel;
-
 ///该 model 及其之前所有收盘价之和
 @property (nonatomic, strong) NSNumber *sumOfLastClose;
-
 ///该 model 及其之前所有成交量之和
 @property (nonatomic, strong) NSNumber *sumOfLastVolume;
-
 ///日期
 @property (nonatomic, copy) NSString *date;
 
@@ -35,7 +31,6 @@
 
 ///成交量
 @property (nonatomic, assign) CGFloat volume;
-
 ///是否是某个月的第一个交易日
 @property (nonatomic, assign) BOOL isFirstTradeDate;
 
@@ -68,10 +63,10 @@
 @property (nonatomic, copy) NSNumber *EMA26;
 
 //初始化Model
-- (void) initWithArray:(NSArray *)arr;
+- (void)initWithArray:(NSArray *)arr;
 
 //初始化第一条数据
-- (void) initFirstModel;
+- (void)initFirstModel;
 
 //初始化其他数据
 - (void)initData;

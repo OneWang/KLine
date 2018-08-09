@@ -17,64 +17,63 @@
  *
  *  @return 转换后的结果
  */
-+(UIColor *)colorWithRGBHex:(UInt32)hex;
++ (UIColor *)colorWithRGBHex:(UInt32)hex;
 
 
 /**
  *  所有图表的背景颜色
  */
-+(UIColor *)backgroundColor;
++ (UIColor *)backgroundColor;
 
 /**
  *  辅助背景色
  */
-+(UIColor *)assistBackgroundColor;
++ (UIColor *)assistBackgroundColor;
 
 /**
  *  涨的颜色
  */
-+(UIColor *)increaseColor;
++ (UIColor *)increaseColor;
 
 
 /**
  *  跌的颜色
  */
-+(UIColor *)decreaseColor;
++ (UIColor *)decreaseColor;
 
 /**
  *  主文字颜色
  */
-+(UIColor *)mainTextColor;
++ (UIColor *)mainTextColor;
 
 /**
  *  辅助文字颜色
  */
-+(UIColor *)assistTextColor;
++ (UIColor *)assistTextColor;
 
 /**
  *  分时线下面的成交量线的颜色
  */
-+(UIColor *)timeLineVolumeLineColor;
++ (UIColor *)timeLineVolumeLineColor;
 
 /**
  *  分时线界面线的颜色
  */
-+(UIColor *)timeLineLineColor;
++ (UIColor *)timeLineLineColor;
 
 /**
  *  长按时线的颜色
  */
-+(UIColor *)longPressLineColor;
++ (UIColor *)longPressLineColor;
 
 /**
  *  ma5的颜色
  */
-+(UIColor *)ma7Color;
++ (UIColor *)ma7Color;
 
 /**
  *  ma30颜色
  */
-+(UIColor *)ma30Color;
-
++ (UIColor *)ma30Color;
 
 @end

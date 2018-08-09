@@ -46,8 +46,8 @@ static StockChartTargetLineStatus StockChartKLineIsEMALine = StockChartTargetLin
 + (CGFloat)kLineWidth{
     return StockChartKLineWidth;
 }
-+ (void)setkLineWith:(CGFloat)kLineWidth
-{
+
++ (void)setkLineWith:(CGFloat)kLineWidth{
     if (kLineWidth > StockChartKLineMaxWidth) {
         kLineWidth = StockChartKLineMaxWidth;
     }else if (kLineWidth < StockChartKLineMinWidth){
@@ -60,37 +60,33 @@ static StockChartTargetLineStatus StockChartKLineIsEMALine = StockChartTargetLin
 /**
  *  K线图的间隔，默认1
  */
-+ (CGFloat)kLineGap
-{
++ (CGFloat)kLineGap{
     return StockChartKLineGap;
 }
 
-+ (void)setkLineGap:(CGFloat)kLineGap
-{
++ (void)setkLineGap:(CGFloat)kLineGap{
     StockChartKLineGap = kLineGap;
 }
 
 /**
  *  MainView的高度占比,默认为0.5
  */
-+ (CGFloat)kLineMainViewRadio
-{
++ (CGFloat)kLineMainViewRadio{
     return StockChartKLineMainViewRadio;
 }
-+ (void)setkLineMainViewRadio:(CGFloat)radio
-{
+
++ (void)setkLineMainViewRadio:(CGFloat)radio{
     StockChartKLineMainViewRadio = radio;
 }
 
 /**
  *  VolumeView的高度占比,默认为0.2
  */
-+ (CGFloat)kLineVolumeViewRadio
-{
++ (CGFloat)kLineVolumeViewRadio{
     return StockChartKLineVolumeViewRadio;
 }
-+ (void)setkLineVolumeViewRadio:(CGFloat)radio
-{
+
++ (void)setkLineVolumeViewRadio:(CGFloat)radio{
     StockChartKLineVolumeViewRadio = radio;
 }
 
@@ -98,14 +94,12 @@ static StockChartTargetLineStatus StockChartKLineIsEMALine = StockChartTargetLin
  *  isEMA线
  */
 
-+ (CGFloat)isEMALine
-{
++ (CGFloat)isEMALine{
     return StockChartKLineIsEMALine;
 }
-+ (void)setisEMALine:(StockChartTargetLineStatus)type
-{
+
++ (void)setisEMALine:(StockChartTargetLineStatus)type{
     StockChartKLineIsEMALine = type;
 }
-
 
 @end

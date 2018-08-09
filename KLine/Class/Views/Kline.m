@@ -23,9 +23,8 @@
 
 - (instancetype)initWithContext:(CGContextRef)context{
     if (self = [super init]) {
-        
-        self.context = context;
-        self.lastDrawDatePoint = CGPointZero;
+        _context = context;
+        _lastDrawDatePoint = CGPointZero;
     }
     return self;
 }
@@ -54,12 +53,12 @@
     CGContextStrokeLineSegments(context, shadowPoints, 2);
     
     //日期
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.kLineModel.date.doubleValue/1000];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:_kLineModel.date.doubleValue/1000];
     NSDateFormatter *formatter = [NSDateFormatter new];
     formatter.dateFormat = @"HH:mm";
     NSString *dateStr = [formatter stringFromDate:date];
     
-    CGPoint drawDatePoint = CGPointMake(self.kLinePositionModel.LowPoint.x + 1, self.maxY + 1.5);
+    CGPoint drawDatePoint = CGPointMake(_kLinePositionModel.LowPoint.x + 1, self.maxY + 1.5);
     if (CGPointEqualToPoint(self.lastDrawDatePoint, CGPointZero) || drawDatePoint.x - self.lastDrawDatePoint.x > 60) {
         ///辅助文字
         [dateStr drawAtPoint:drawDatePoint withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:11] , NSForegroundColorAttributeName : [UIColor lightGrayColor]}];

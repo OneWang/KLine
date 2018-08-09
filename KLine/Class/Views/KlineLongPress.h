@@ -14,10 +14,8 @@
 
 ///当前长按选中的位置 model
 @property (nonatomic, strong) KLinePositionModel *selectedPositionModel;
-
 ///当前长按选中的 model
 @property (nonatomic, strong) KLineModel *selectedModel;
-
 ///当前滑动的 scrollview
 @property (nonatomic, strong) UIScrollView *stockScrollView;
 

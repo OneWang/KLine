@@ -54,23 +54,21 @@ static NSInteger const StockChartSegmentStartTag = 2000;
             btn.tag = StockChartSegmentStartTag + 100 + idx;
             [btn addTarget:self action:@selector(event_segmentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             [btn setTitle:title forState:UIControlStateNormal];
-            [_indicatorView addSubview:btn];
+            [self.indicatorView addSubview:btn];
             
             [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-                
-                make.height.equalTo(_indicatorView).multipliedBy(1.0f/titleArray.count);
-                make.width.equalTo(_indicatorView);
-                make.left.equalTo(_indicatorView);
-                if(preBtn)
-                {
+                make.height.equalTo(self.indicatorView).multipliedBy(1.0f/titleArray.count);
+                make.width.equalTo(self.indicatorView);
+                make.left.equalTo(self.indicatorView);
+                if(preBtn){
                     make.top.equalTo(preBtn.mas_bottom);
                 } else {
-                    make.top.equalTo(_indicatorView);
+                    make.top.equalTo(self.indicatorView);
                 }
             }];
             UIView *view = [UIView new];
             view.backgroundColor = [UIColor colorWithRed:52.f/255.f green:56.f/255.f blue:67/255.f alpha:1];
-            [_indicatorView addSubview:view];
+            [self.indicatorView addSubview:view];
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.right.equalTo(btn);
                 make.top.equalTo(btn.mas_bottom);
@@ -115,8 +113,7 @@ static NSInteger const StockChartSegmentStartTag = 2000;
             make.left.equalTo(self.mas_left);
             make.height.equalTo(self).multipliedBy(1.0f/count);
             make.width.equalTo(self);
-            if(preBtn)
-            {
+            if(preBtn){
                 make.top.equalTo(preBtn.mas_bottom).offset(0.5);
             } else {
                 make.top.equalTo(self);

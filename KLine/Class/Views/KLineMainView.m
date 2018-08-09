@@ -14,16 +14,12 @@
 
 ///需要绘制的 model 数组
 @property (nonatomic, strong) NSMutableArray<KLineModel *> *needDrawKLineModels;
-
 ///需要绘制的 model 位置数组
 @property (nonatomic, strong) NSMutableArray *needDrawKLinePositionModels;
-
 ///index 开始的 X 的值
 @property (nonatomic, assign) NSInteger startXPosition;
-
 ///旧的 contentoffset 值
 @property (nonatomic, assign) CGFloat oldContentOffsetX;
-
 ///旧的缩放值
 @property (nonatomic, assign) CGFloat oldScale;
 
@@ -33,9 +29,9 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        self.oldScale = 0;
-        self.oldContentOffsetX = 0;
-        self.needDrawStartIndex = 0;
+        _oldScale = 0;
+        _oldContentOffsetX = 0;
+        _needDrawStartIndex = 0;
     }
     return self;
 }
@@ -47,7 +43,7 @@
     
     //如果数组为空,则不进行绘制,直接设置本 view 为背景
     CGContextRef context = UIGraphicsGetCurrentContext();
-    if (!self.kLineModels) {
+    if (!_kLineModels) {
         CGContextClearRect(context, rect);
         //所有图标的背景颜色
         CGContextSetFillColorWithColor(context, [UIColor backgroundColor].CGColor);
@@ -66,10 +62,10 @@
     CGContextFillRect(context, CGRectMake(0, self.frame.size.height - 15, self.frame.size.width, 15));
     
     //画线
-    if (self.mainViewType == StockChartcenterViewTypeKline) {
+    if (_mainViewType == StockChartcenterViewTypeKline) {
         Kline *kLine = [[Kline alloc] initWithContext:context];
         kLine.maxY = StockChartKLineMainViewMaxY;
-        [self.needDrawKLinePositionModels enumerateObjectsUsingBlock:^(KLinePositionModel *  _Nonnull kLinePositionModel, NSUInteger idx, BOOL * _Nonnull stop) {
+        [_needDrawKLinePositionModels enumerateObjectsUsingBlock:^(KLinePositionModel *  _Nonnull kLinePositionModel, NSUInteger idx, BOOL * _Nonnull stop) {
             kLine.kLinePositionModel = kLinePositionModel;
             kLine.kLineModel = self.needDrawKLineModels[idx];
             UIColor *kLineColor = [kLine draw];
@@ -77,14 +73,14 @@
         }];
     }else{
         __block NSMutableArray *positions = @[].mutableCopy;
-        [self.needDrawKLinePositionModels enumerateObjectsUsingBlock:^(KLinePositionModel *  _Nonnull positionModel, NSUInteger idx, BOOL * _Nonnull stop) {
+        [_needDrawKLinePositionModels enumerateObjectsUsingBlock:^(KLinePositionModel *  _Nonnull positionModel, NSUInteger idx, BOOL * _Nonnull stop) {
             UIColor *strokeColor = positionModel.OpenPoint.y < positionModel.ClosePoint.y ? [UIColor redColor] : [UIColor greenColor];
             [kLineColors addObject:strokeColor];
             [positions addObject:[NSValue valueWithCGPoint:positionModel.ClosePoint]];
         }];
         
         __block CGPoint lastDrawDatePoint = CGPointZero;
-        [self.needDrawKLinePositionModels enumerateObjectsUsingBlock:^(KLinePositionModel *  _Nonnull positionModel, NSUInteger idx, BOOL * _Nonnull stop) {
+        [_needDrawKLinePositionModels enumerateObjectsUsingBlock:^(KLinePositionModel *  _Nonnull positionModel, NSUInteger idx, BOOL * _Nonnull stop) {
             CGPoint point = [positions[idx] CGPointValue];
             //日期
             NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.needDrawKLineModels[idx].date.doubleValue/1000];
@@ -100,9 +96,9 @@
         }];
     }
     
-    if (self.delegate && kLineColors.count > 0) {
-        if ([self.delegate respondsToSelector:@selector(kLineMainViewCurrentNeedDrawKLineColors:)]) {
-            [self.delegate kLineMainViewCurrentNeedDrawKLineColors:kLineColors];
+    if (_delegate && kLineColors.count > 0) {
+        if ([_delegate respondsToSelector:@selector(kLineMainViewCurrentNeedDrawKLineColors:)]) {
+            [_delegate kLineMainViewCurrentNeedDrawKLineColors:kLineColors];
         }
     }
 }
@@ -122,16 +118,15 @@
     [self setNeedsDisplay];
 }
 
-
 /**
  更新 MainView 的宽度
  */
 - (void)updateMainViewWidth{
     //根据 stockModels 的个数和间隔和 K 线的宽度计算出 self 的宽度,并设置 contentsize
-    CGFloat kLineViewWidth = self.kLineModels.count * [StockConstantVariable kLineWidth] + (self.kLineModels.count + 1) * [StockConstantVariable kLineGap] + 10;
+    CGFloat kLineViewWidth = _kLineModels.count * [StockConstantVariable kLineWidth] + (_kLineModels.count + 1) * [StockConstantVariable kLineGap] + 10;
     
-    if (kLineViewWidth < self.parentScrollView.bounds.size.width) {
-        kLineViewWidth = self.parentScrollView.bounds.size.width;
+    if (kLineViewWidth < _parentScrollView.bounds.size.width) {
+        kLineViewWidth = _parentScrollView.bounds.size.width;
     }
     
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -141,9 +136,8 @@
     [self layoutIfNeeded];
     
     //更新 scrollview 的 contentsize
-    self.parentScrollView.contentSize = CGSizeMake(kLineViewWidth, self.parentScrollView.contentSize.height);
+    _parentScrollView.contentSize = CGSizeMake(kLineViewWidth, _parentScrollView.contentSize.height);
 }
-
 
 /**
  长按的时候根据原始的 X 位置获得精确的 X 的位置
@@ -154,15 +148,15 @@
 - (CGFloat)getExactXPositionWithOriginXPosition:(CGFloat)originXPosition{
     CGFloat xPositionInMainView = originXPosition;
     NSInteger startIndex = (NSInteger)((xPositionInMainView - self.startXPosition)/([StockConstantVariable kLineGap] + [StockConstantVariable kLineWidth]));
-    NSInteger arrCount = self.needDrawKLinePositionModels.count;
+    NSInteger arrCount = _needDrawKLinePositionModels.count;
     for (NSInteger index = startIndex > 0 ? startIndex - 1 : 0; index < arrCount; ++index) {
-        KLinePositionModel *kLinePositionModel = self.needDrawKLinePositionModels[index];
+        KLinePositionModel *kLinePositionModel = _needDrawKLinePositionModels[index];
         
         CGFloat minX = kLinePositionModel.HighPoint.x - ([StockConstantVariable kLineGap] + [StockConstantVariable kLineWidth] / 2);
         CGFloat maxX = kLinePositionModel.HighPoint.x + ([StockConstantVariable kLineGap] + [StockConstantVariable kLineWidth] / 2);
         if (xPositionInMainView > minX && xPositionInMainView < maxX) {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(kLineMainViewLongPressKLinePositionModel:kLineModel:)]) {
-                [self.delegate kLineMainViewLongPressKLinePositionModel:self.needDrawKLinePositionModels[index] kLineModel:self.needDrawKLineModels[index]];
+            if (_delegate && [_delegate respondsToSelector:@selector(kLineMainViewLongPressKLinePositionModel:kLineModel:)]) {
+                [_delegate kLineMainViewLongPressKLinePositionModel:_needDrawKLinePositionModels[index] kLineModel:_needDrawKLineModels[index]];
             }
             return kLinePositionModel.HighPoint.x;
         }
@@ -177,16 +171,16 @@
     CGFloat lineWidth = [StockConstantVariable kLineWidth];
     
     //数组个数
-    CGFloat scrollViewWidth = self.parentScrollView.frame.size.width;
+    CGFloat scrollViewWidth = _parentScrollView.frame.size.width;
     NSInteger needDrawKLineCount = (scrollViewWidth - lineGap)/(lineGap + lineWidth);
     
     //起始位置
     NSInteger needDrawKLineStartIndex;
     
-    if (self.pinchStartIndex > 0) {
-        needDrawKLineStartIndex = self.pinchStartIndex;
-        _needDrawStartIndex = self.pinchStartIndex;
-        self.pinchStartIndex = -1;
+    if (_pinchStartIndex > 0) {
+        needDrawKLineStartIndex = _pinchStartIndex;
+        self.needDrawStartIndex = _pinchStartIndex;
+        _pinchStartIndex = -1;
     }else{
         needDrawKLineStartIndex = self.needDrawStartIndex;
     }
@@ -195,28 +189,26 @@
     [self.needDrawKLineModels removeAllObjects];
     
     //赋值数组
-    if (needDrawKLineStartIndex < self.kLineModels.count) {
-        if (needDrawKLineStartIndex + needDrawKLineCount < self.kLineModels.count) {
-            [self.needDrawKLineModels addObjectsFromArray:[self.kLineModels subarrayWithRange:NSMakeRange(needDrawKLineStartIndex, needDrawKLineCount)]];
+    if (needDrawKLineStartIndex < _kLineModels.count) {
+        if (needDrawKLineStartIndex + needDrawKLineCount < _kLineModels.count) {
+            [self.needDrawKLineModels addObjectsFromArray:[_kLineModels subarrayWithRange:NSMakeRange(needDrawKLineStartIndex, needDrawKLineCount)]];
         }else{
-            [self.needDrawKLineModels addObjectsFromArray:[self.kLineModels subarrayWithRange:NSMakeRange(needDrawKLineStartIndex, self.kLineModels.count - needDrawKLineStartIndex)]];
+            [self.needDrawKLineModels addObjectsFromArray:[_kLineModels subarrayWithRange:NSMakeRange(needDrawKLineStartIndex, _kLineModels.count - needDrawKLineStartIndex)]];
         }
     }
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(kLineMainViewCurrentNeedDrawKLineModels:)]) {
-        [self.delegate kLineMainViewCurrentNeedDrawKLineModels:self.needDrawKLineModels];
+    if (_delegate && [_delegate respondsToSelector:@selector(kLineMainViewCurrentNeedDrawKLineModels:)]) {
+        [_delegate kLineMainViewCurrentNeedDrawKLineModels:_needDrawKLineModels];
     }
-    
-    return self.needDrawKLineModels;
+    return _needDrawKLineModels;
 }
 
 #pragma mark - 将model 转换为 position 模型
 - (NSArray *)private_convertToKLinePositionModelWithKLineModels{
-    if (!self.needDrawKLineModels) {
+    if (!_needDrawKLineModels) {
         return nil;
     }
     
-    NSArray *kLineModels = self.needDrawKLineModels;
+    NSArray *kLineModels = _needDrawKLineModels;
     
     //计算最小单位
     KLineModel *firstModel = kLineModels.firstObject;
@@ -236,11 +228,11 @@
     minAssert *= 0.9991;
     
     CGFloat minY = StockChartKLineMainViewMinY;
-    CGFloat maxY = self.parentScrollView.frame.size.height * [StockConstantVariable kLineMainViewRadio] - 15;
+    CGFloat maxY = _parentScrollView.frame.size.height * [StockConstantVariable kLineMainViewRadio] - 15;
     
     CGFloat unitValue = (maxAssert - minAssert) / (maxY - minY);
     
-    [self.needDrawKLinePositionModels removeAllObjects];
+    [_needDrawKLinePositionModels removeAllObjects];
     
     NSInteger kLineModelCount = kLineModels.count;
     for (NSInteger idx = 0; idx < kLineModelCount; ++idx) {
@@ -274,14 +266,12 @@
                 }
             }
         }
-        
         CGPoint closePoint = CGPointMake(xPosition, closePointY);
         CGPoint highPoint = CGPointMake(xPosition, ABS(maxY - (kLineModel.high .floatValue - minAssert)/unitValue));
         CGPoint lowPoint = CGPointMake(xPosition, ABS(maxY - (kLineModel.low.floatValue - minAssert)/unitValue));
         
         KLinePositionModel *kLinePositionModel = [KLinePositionModel modelWithOpen:openPoint close:closePoint high:highPoint low:lowPoint];
         [self.needDrawKLinePositionModels addObject:kLinePositionModel];
-        
     }
     
     if (self.delegate) {
@@ -292,7 +282,6 @@
             [self.delegate kLineMainViewCurrentNeedDrawKLinePositionModels:self.needDrawKLinePositionModels];
         }
     }
-    
     return self.needDrawKLinePositionModels;
 }
 

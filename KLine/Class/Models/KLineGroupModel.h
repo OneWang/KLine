@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @class KLineModel;
-
 @interface KLineGroupModel : NSObject
 
 @property (nonatomic, strong) NSArray<KLineModel *> *models;

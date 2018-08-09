@@ -13,16 +13,12 @@
 
 ///主 view 所占比例
 @property (nonatomic, assign) CGFloat mainViewRatio;
-
 ///成交量 view 所占比例
 @property (nonatomic, assign) CGFloat volumeViewRatio;
-
 ///数据
 @property (nonatomic, strong) NSArray<KLineModel *> *kLineModels;
-
 ///K 线类型
 @property (nonatomic, assign) StockChartCenterViewType mainViewType;
-
 ///Accessory 指标类型
 @property (nonatomic, assign) StockChartTargetLineStatus targetLineStatus;
 

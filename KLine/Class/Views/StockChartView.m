@@ -14,13 +14,10 @@
 
 ///K 线图
 @property (nonatomic, strong) KLineView *kLineView;
-
 ///K 线图类型
 @property (nonatomic, assign) StockChartCenterViewType currentCenterViewType;
-
 ///选择 view
 @property (nonatomic, strong) StockChartSegmentView *segmentView;
-
 ///当前索引
 @property (nonatomic, assign) NSInteger currentIndex;
 
